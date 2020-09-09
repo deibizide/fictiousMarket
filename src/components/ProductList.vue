@@ -7,7 +7,7 @@
             </div>
         </div>
         <ProductFilter />
-        <div class="productList__product-info" v-for="(product, index) in sortedArray" :key="product.id">
+        <div class="productList__product-info" v-for="(product, index) in filterByProduct" :key="product.id">
             <img :src="product.image" :alt="product.name" />
             <div class="productList__product-info--text">
                 <span>{{ product.name }}</span>
@@ -68,15 +68,8 @@ export default {
                 name,
                 price,
             };
-            // const findSelectedProduct = this.productsSelected.find(item => item.name);
-
-            // if (findSelectedProduct) {
-            //     this.productsSelected[index].amount++;
-            //     console.log('found existing item');
-            // }
 
             this.productsSelected.push(product);
-            // console.log(this.productsSelected);
         },
         setSearch(res) {
             this.searchRequest = res;
@@ -87,15 +80,6 @@ export default {
             return this.products.filter(item => {
                 return item.name.match(this.searchRequest);
             });
-        },
-        sortedArray: function () {
-            function compare(a, b) {
-                console.log(a);
-                if (a.id < b.id) return -1;
-                if (a.id > b.id) return 1;
-                return 0;
-            }
-            return compare;
         },
     },
     mounted() {
